@@ -31,7 +31,7 @@ toc: true
   
 
 
-CATS-LAB 디렉토리로 이동 후 다음 명령어를 실행시킵니다.
+CATS-LAB 디렉토리로 이동 후 다음 명령어를 실행시킵니다.  
 (python ver. 3.6.4과 pip, 그리고, 아래 명령어 실행을 위한 python package인 setuptools이 설치된 환경을 전제로 합니다.) 
  
 -----------------------------  

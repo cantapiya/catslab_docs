@@ -71,8 +71,14 @@ docs:
         url: /docs/backtest-backtestcontext/
       - title: "02 Run Backtest"
         url: /docs/backtest-run/
-      - title: "03~06 initialize, run_strategy, make_orders, Order"
-        url: /docs/backtest-initialize_run_strategy_make_orders_order/
+      - title: "03 initialize"
+        url: /docs/backtest-initialize/
+      - title: "04 run_strategy"
+        url: /docs/backtest-run_strategy/
+      - title: "05 make_orders"
+        url: /docs/backtest-make_orders/
+      - title: "06 Order"
+        url: /docs/backtest-order/
       - title: "07 Backtest Result"
         url: /docs/backtest-result/
       - title: "08 Plot"
