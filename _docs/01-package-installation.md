@@ -19,7 +19,7 @@ toc: true
   
 
 
-[CATS Lab Github](https://github.com/Derek-tjhwang/CATS-LAB) 페이지에서 git clone을 이용하여 설치에 필요한 파일들을 내려받습니다.
+[CATS Lab Github](https://github.com/Derek-tjhwang/CATS-LAB) 사이트에서 git clone을 이용하여 설치에 필요한 파일들을 내려받습니다.
 
 -----------------------------  
 `~$ git clone https://github.com/Derek-tjhwang/CATS-LAB.git`  
@@ -73,8 +73,9 @@ CATS Lab 패키지를 설치한 후 패키지에서 사용할 환경변수를 �
 
 필요한 환경변수로는 CATS Lab API Server의 Host와 Secret Key, 위의 과정에서 발급받은 UUID와 BOT ID입니다.
 
-다음과 같이 환경변수를 등록 후 CATS Lab 패키지를 사용할 수 있습니다.
------------------------------
+다음과 같이 환경변수를 등록 후 CATS Lab 패키지를 사용할 수 있습니다.  
+
+-----------------------------  
 `~$ export COZA_HOST="http://api.coza.me"`  
 `~$ export COZA_SECRET=SECRET_KEY`  
 `~$ export COZA_USER_UUID=USER_UUID`  

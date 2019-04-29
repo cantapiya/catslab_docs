@@ -14,10 +14,11 @@ locale                   : "ko"
 title                    : "CATS Lab Docs"
 title_separator          : "-"
 name                     : # &name "Michael Rose" # &name is a YAML anchor which can be *referenced later
-description              : # &description "A flexible Jekyll theme for your blog or site with a minimalist aesthetic."
+description              : Descriptions for CATS Lab package and Kubernetes settings # &description "A flexible Jekyll theme for your blog or site with a minimalist aesthetic."
 url                      : https://cantapiya.github.io/catslab_docs # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/catslab_docs" # the subpath of your site, e.g. "/blog"
 repository               : "cantapiya/catslab_docs"
+
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -140,7 +141,7 @@ analytics:
 
 # Reading Files
 include:
-  - .htaccess
+#   - .htaccess
   - _pages
 exclude:
   - "*.sublime-project"
