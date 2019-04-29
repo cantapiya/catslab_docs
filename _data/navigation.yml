@@ -34,60 +34,69 @@ main:
 
 # documentation links
 docs:
-  - title: Getting Started
+  - title: CATS Lab Package
     children:
-      - title: "Quick-Start Guide"
-        url: /docs/quick-start-guide/
-      - title: "Structure"
-        url: /docs/structure/
-      - title: "Installation"
-        url: /docs/installation/
-      - title: "Upgrading"
-        url: /docs/upgrading/
-  - title: Customization
+      - title: "Package Installation"
+        url: /docs/package-installation/
+  - title: CATS Lab Trade
     children:
-      - title: "Configuration"
-        url: /docs/configuration/
-      - title: "Overriding Theme Defaults"
-        url: /docs/overriding-theme-defaults/
-      - title: "Navigation"
-        url: /docs/navigation/
-      - title: "UI Text"
-        url: /docs/ui-text/
-      - title: "Authors"
-        url: /docs/authors/
-      - title: "Layouts"
-        url: /docs/layouts/
-  - title: Content
+      - title: "00 Trade Basic"
+        url: /docs/trade-basic/
+      - title: "01 BotContext"
+        url: /docs/trade-botcontext/
+      - title: "02 Run Trade"
+        url: /docs/trade-run/
+      - title: "03 initialize"
+        url: /docs/trade-initialize/
+      - title: "04 run_strategy"
+        url: /docs/trade-run_strategy/
+      - title: "05 make_orders"
+        url: /docs/trade-make_orders/
+      - title: "06 Order"
+        url: /docs/trade-order/
+      - title: "07 set_order"
+        url: /docs/trade-set_order/
+      - title: "08 order_list"
+        url: /docs/trade-order_list/
+      - title: "09 set_cancel"
+        url: /docs/trade-set_cancel/ 
+      - title: "10 others"
+        url: /docs/trade-others/        
+        
+  - title: CATS Lab Backtest
     children:
-      - title: "Working with Posts"
-        url: /docs/posts/
-      - title: "Working with Pages"
-        url: /docs/pages/
-      - title: "Working with Collections"
-        url: /docs/collections/
-      - title: "Helpers"
-        url: /docs/helpers/
-      - title: "Utility Classes"
-        url: /docs/utility-classes/
-  - title: Extras
+      - title: "00 Backtest Basic"
+        url: /docs/backtest-basic/
+      - title: "01 BacktestContext"
+        url: /docs/backtest-backtestcontext/
+      - title: "02 Run Backtest"
+        url: /docs/backtest-run/
+      - title: "03~06 initialize, run_strategy, make_orders, Order"
+        url: /docs/backtest-initialize_run_strategy_make_orders_order/
+      - title: "07 Backtest Result"
+        url: /docs/backtest-result/
+      - title: "08 Plot"
+        url: /docs/backtest-plot/  
+        
+  - title: Kubernetes 
     children:
-      - title: "Stylesheets"
-        url: /docs/stylesheets/
-      - title: "JavaScript"
-        url: /docs/javascript/
-  - title: Meta
-    children:
-      - title: "History"
-        url: /docs/history/
-      - title: "Contributing"
-        url: /docs/contributing/
-      - title: "Old 2.2 Docs"
-        url: /docs/docs-2-2/
-      - title: "License"
-        url: /docs/license/
-      - title: "Terms &amp; Privacy Policy"
-        url: /terms/
+      - title: "01 AWS Settings & Installation"
+        url: /docs/k8s-AWS_settings/
+      - title: "02 k8s Cluster on AWS with Kops"
+        url: /docs/k8s-kops_cluster/
+
+#  - title: Meta
+#    children:
+#      - title: "History"
+#        url: /docs/history/
+#      - title: "Contributing"
+#        url: /docs/contributing/
+#      - title: "Old 2.2 Docs"
+#        url: /docs/docs-2-2/
+#      - title: "License"
+#        url: /docs/license/
+#      - title: "Terms &amp; Privacy Policy"
+#        url: /terms/
 
 # sidebar navigation list sample
 sidebar-sample:
