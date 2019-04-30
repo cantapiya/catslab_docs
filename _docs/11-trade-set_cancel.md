@@ -35,7 +35,7 @@ order_id를 입력하여 주문을 취소하는 경우 currency를 함께 입력
 수량을 입력하지 않는 경우 입력한 currency 또는 currency의 order_id에 남아 있는 주문 수량 전체를 취소합니다.
 
 단, 부분 취소의 경우 coinone 거래소에서만 제공하며, upbit 거래소에서는 부분취소 기능을 제공하지 않습니다.
-upbit 거래소의 경우 qty를 입력하더라도(currency와 order_id도 함께) 미체결 주문의 모든 수량을 주문취소합니다. 
+upbit 거래소의 경우 qty를 입력하더라도(currency와 order_id도 함께 입력) 미체결 주문의 모든 수량을 주문취소합니다. 
 
 다음은 주문을 취소하는 4가지 방법에 대한 예시입니다. 
 

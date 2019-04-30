@@ -44,6 +44,10 @@ class Order(exchange, currency, order_type, quantity, price, fiat):
 (예: "krw", "usd", … )
 
 
+### 매수/매도 주문 시 주의사항  
+현재 지원하는 coinone 거래소와 upbit 거래소의 경우 각 가상화폐마다 거래 최소금액(500 KRW)이 지정되어 있으며, 이 금액이 넘지 않는 매수/매도주문의 경우 거래소로의 주문 전송이 불가능합니다.
+
+
 Order 객체의 사용 예시는 다음과 같습니다.
 
 __매수주문 (현재 가격으로 주문):__  
