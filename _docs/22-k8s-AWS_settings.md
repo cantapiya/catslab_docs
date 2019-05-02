@@ -80,8 +80,9 @@ toc: true
 - 다음 명령어를 통해 생성한 인스턴스로 접속할 수 있습니다.  
 
 -----------------------------  
-`~$ sudo ssh -i [KEY_PAIR_NAME].pem ubuntu@[IPv4 퍼블릭 IP]`  
-
+```shell
+$ sudo ssh -i [KEY_PAIR_NAME].pem ubuntu@[IPv4 퍼블릭 IP]  
+```
 -----------------------------  
 
 ![인스턴스 접속](https://user-images.githubusercontent.com/47657715/56703430-b5147f80-6743-11e9-877e-2b769593d779.png)
@@ -97,10 +98,11 @@ toc: true
 kops는 Kubernetes 클러스터를 만들어 주는 CLI 도구이며, 실행 파일 하나만 다운 받으면 됩니다.  
 
 -----------------------------  
-`~$ wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64`  
-`~$ chmod +x ./kops`  
-`~$ sudo mv ./kops /usr/local/bin/`  
-
+```shell
+$ wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64  
+$ chmod +x ./kops  
+$ sudo mv ./kops /usr/local/bin/  
+```  
 -----------------------------  
 
 ![kops 설치](https://user-images.githubusercontent.com/47657715/56703639-cc07a180-6744-11e9-91d8-3d8377ca6a66.png)
@@ -113,10 +115,11 @@ kubectl은 이미 만들어져 있는 Kubernetes 클러스터를 관리하기 �
 
 -----------------------------  
 
-`~$ wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl`  
-`~$ chmod +x ./kubectl`  
-`~$ sudo mv ./kubectl /usr/local/bin/kubectl`  
-
+```shell
+$ wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl  
+$ chmod +x ./kubectl  
+$ sudo mv ./kubectl /usr/local/bin/kubectl  
+```
 -----------------------------  
 
 
@@ -198,10 +201,11 @@ AmazonVPCFullAccess
 AWS CLI 설치를 위해 다음을 실행하여 설치합니다.  
 
 -----------------------------  
-`~$ sudo apt update`  
-`~$ sudo apt install -y python-pip`  
-`~$ pip install awscli`  
-
+```shell
+$ sudo apt update  
+$ sudo apt install -y python-pip  
+$ pip install awscli  
+```
 -----------------------------  
 
 
@@ -216,12 +220,13 @@ aws 환경 설정을 위해 aws configure를 입력 후 필요한 항목들을 �
 AWS Access Key ID와 AWS Secret Access Key에는 IAM 그룹 및 사용자 설정 시 발급받은 Access Key와 Secret Access Key를 입력합니다.  
 
 -----------------------------  
-`~$ aws configure`  
-`~$ AWS Access Key ID [None]: <Your access key id>`  
-`~$ AWS Secret Access Key [None]: <Your secret access key>`  
-`~$ Default region name [None]: ap-northeast-2`  
-`~$ Default output format [None]:`  
-
+```shell
+$ aws configure  
+$ AWS Access Key ID [None]: <Your access key id>  
+$ AWS Secret Access Key [None]: <Your secret access key>  
+$ Default region name [None]: ap-northeast-2  
+$ Default output format [None]:  
+```
 -----------------------------  
 
 
@@ -232,9 +237,10 @@ AWS Access Key ID와 AWS Secret Access Key에는 IAM 그룹 및 사용자 설정
 환경설정이 제대로 되었는지 다음과 같은 명령어를 통해 확인해 볼 수 있습니다.  
 
 -----------------------------  
-`~$ aws ec2 describe-instances`  
-`~$ aws iam list-users`  
-
+```shell
+$ aws ec2 describe-instances  
+$ aws iam list-users  
+```
 -----------------------------  
 
   
