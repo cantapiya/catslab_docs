@@ -18,7 +18,8 @@ order_list는 가상화폐 종류를 key값으로 한 dictionary 내부에 다�
 
 order_list에 대한 예시는 다음과 같습니다. coinone_bot이라는 BotContext에 저장되어 있는 order_list로, ‘iota’와 ‘xrp’에 관련된 미체결 주문 정보가 저장되어 있는 것을 볼 수 있습니다. 
 
-![08 order_list Example1](https://user-images.githubusercontent.com/47657715/56647672-ce261d80-66bc-11e9-913a-a99fe66470b1.png)
+
+<img width="520" alt="" src="https://user-images.githubusercontent.com/47657715/57594284-352b4980-757a-11e9-808f-cc9d821cc3d4.png">
 
 
 order_list에 저장된 각 주문들의 정보는 다음과 같습니다.
@@ -36,7 +37,7 @@ upbit 거래소의 경우 매수/매도 두 경우 모두 거래한 기축화폐
   
 
 __coinone 거래소__  
-‘order_type’이 ‘BUY’인 경우 수수료는 주문한 가상 화폐로 지불되므로, ‘fee’에 저장된 값은 해당 가상 화폐의 수량이며,  
+‘order_type’이 ‘BUY’인 경우 수수료는 주문한 가상화폐로 지불되므로, ‘fee’에 저장된 값은 해당 가상화폐의 수량이며,  
 ‘order_type’이 ‘SELL’인 경우 ‘fee’에 저장된 값은 Bot에서 사용하는 거래소의 기축화폐(fiat)에 해당합니다. 
 
 
@@ -62,15 +63,22 @@ Bot에서 사용하는 거래소의 기축화폐의 정보입니다.
 
 
 ### 8.8. datetime
-주문한 시간의 datetime에 대한 정보입니다.
+주문한 시간의 datetime에 대한 정보입니다.  
+
+__coinone 거래소__  
+coinone 거래소의 경우 부분 체결 정보를 저장하기 위해 datetime이 저장된 list 형태로 관리합니다. order_list의 경우 미체결 주문만 관리하므로, 부분체결이 일어난 뒤 미체결 수량이 남아있는 경우 부분체결이 일어난 시간의 datetime을 datetime list에 저장하여 관리합니다. 
+
+__upbit 거래소__  
+upbit 거래소의 경우 부분체결을 처리하는 방식이 coinone과 다르기 때문에, datetime은 list 타입이 아니라 주문을 넣거나 주문을 지정한 시간의 datetime이 저장됩니다.  
+
+<br>  
 
 
-__8.1. ~ 8.8. 내용은 두 거래소 모두 공통된 정보이며, 다음 정보는 UPBIT 거래소일 경우 추가로 저장되는 정보입니다.__  
+__8.1. ~ 8.8. 내용은 두 거래소 모두 공통된 정보이며, 다음 정보는 upbit 거래소일 경우 추가로 저장되는 정보입니다.__  
 
 
 ### 8.9. locked  
 보유 자산 중 해당 주문으로 인해 거래 중지 및 동결된 자산의 수량입니다. 
-매수 주문인 경우 기축화폐가, 매도 주문인 경우 주문한 가상 화폐가 'locked' 정보에 저장됩니다.
-
+매수 주문인 경우 기축화폐가, 매도 주문인 경우 주문한 가상화폐가 'locked' 정보에 저장됩니다.
 
 

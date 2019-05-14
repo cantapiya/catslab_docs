@@ -13,6 +13,12 @@ toc: true
 BotContext로 지정한 BOT_NAME으로 context의 run 함수를 통해 Bot을 실행 시킬 수 있습니다. 
 (예: BOT_NAME.run())
 
+다음은 [Trade-01 BotContext](/catslab_docs/docs/trade-botcontext)에서 생성한 BotContext를 실행한 예시입니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/57592495-e679b180-7571-11e9-844c-9fc0327e5373.png)  
+
+<br>  
+
 Bot을 실행하게 되면 context를 생성할 때 입력한 정보들과 함수들을 이용하여, 1분 주기로 다음과 같은 과정을 반복합니다.
 
 
@@ -60,4 +66,13 @@ initialize에서 입력한 safety setting의 조건을 만족하는지의 여부
 ### 2.7. Run Trading
 거래소 API를 이용하여 거래소로 생성한 주문들을 요청합니다.  
 
-이전 단계인 make_orders에서 생성한 주문들을 거래소 API를 사용하여 거래소로 주문 요청을 진행합니다. 
+이전 단계인 make_orders에서 생성한 주문들을 거래소 API를 사용하여 거래소로 주문 요청을 진행합니다.  
+
+<br>  
+ 
+
+
+
+
+
+

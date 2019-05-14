@@ -1,4 +1,4 @@
----
+가상화폐---
 title: "06 Order"
 permalink: /docs/trade-order/
 excerpt: "CATS Lab Trade 06 Order"
@@ -22,7 +22,7 @@ class Order(exchange, currency, order_type, quantity, price, fiat):
 
 
 ### 6.2. currency  
-거래소에 주문을 넣을 가상 화폐의 명칭을 string 타입으로 입력합니다.  
+거래소에 주문을 넣을 가상화폐의 명칭을 string 타입으로 입력합니다.  
 (예: “btc”, “eth”, “xrp”, … )
 
 
@@ -65,8 +65,13 @@ __매도주문 (지정가 주문):__
 from coza.objects import Order
 
 sell_order = Order(exchange='upbit', currency='eth', order_type='SELL', fiat='krw', price=150000, quantity=0.1)
-```
+```  
 
+<br>  
+
+Order 객체만 생성한 예시는 다음과 같습니다.  
+
+![06 Order 객체 Example1](https://user-images.githubusercontent.com/47657715/56643701-14777e80-66b5-11e9-91ce-d43aafaf4172.png)
 
   
 
