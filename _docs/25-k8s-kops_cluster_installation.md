@@ -53,13 +53,6 @@ $ export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
   
 작업을 편리하게 하기 위해 아래 환경 변수도 생성합니다. 
 
------------------------------  
-```shell
-$ export export NAME=<cluster name>  
-$ export KOPS_STATE_STORE=s3://<bucket name>   
-```
------------------------------ 
-
 Gossip 기반 클러스터를 사용할 계획이기 때문에 클러스터 이름은 .k8s.local로 입력합니다. (예: myfirstcluster.k8s.local)
 bucket name에는 위의 S3 버킷 생성 과정에서 입력한 bucket name을 입력합니다.
 
@@ -183,7 +176,7 @@ $ kubectl -n kube-system get po    # kube-system 네임스페이스 안의 Pod �
 
 -----------------------------  
 ```shell
-$ ssh admin@<Master Node IP> 
+$ ssh admin@[Master Node IP]  
 ```
 -----------------------------  
   

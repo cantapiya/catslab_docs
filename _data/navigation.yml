@@ -90,6 +90,11 @@ docs:
         url: /docs/k8s-AWS_settings/
       - title: "02 k8s Cluster on AWS with Kops"
         url: /docs/k8s-kops_cluster/
+      - title: "03 k8s Dashboard"
+        url: /docs/k8s-kops_dashboard/
+      - title: "04 CATS Lab Cluster Installation"
+        url: /docs/k8s-kops_installation/
+
 
 #  - title: Meta
 #    children:
