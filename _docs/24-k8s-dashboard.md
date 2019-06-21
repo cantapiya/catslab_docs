@@ -1,6 +1,6 @@
 ---
 title: "03 k8s Dashboard"
-permalink: /docs/k8s-kops_dashboard/
+permalink: /docs/k8s-dashboard/
 excerpt: "Kubernetes Dashboard"
 last_modified_at: 2019-06-19T12:20:00
 redirect_from:
