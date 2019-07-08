@@ -55,7 +55,7 @@ CATS Lab Bot 클러스터를 구축하기 이전에 Docker Hub 계정을 생성�
 
 ### Git 설치하기  
 
-[k8s Cluster on AWS with Kops](/catslab_docs/docs/k8s-kops_cluster/)의 과정을 따라 클러스터를 설치했다면, git이 자동으로 설치됐을 것입니다.  
+[k8s Cluster on AWS with Kops](/catslab_docs/docs/k8s-kops_cluster/)의 과정을 따라 클러스터를 설치했다면, git이 자동으로 설치됐을 것입니다. (인스턴스 생성 초기부터 설치돼 있습니다.)  
 
 다음 명령어를 통해 Git이 제대로 설치되었는지를 확인합니다.  
 
@@ -87,6 +87,8 @@ $ git clone https://github.com/Derek-tjhwang/CATS-LAB.git
 
 
 
+
+
 ### Docker Image 빌드하기  
 
 [Package Installation](/catslab_docs/docs/package-installation/)과 같이 내려 받은 CATS Lab 패키지를 정상적으로 설치했다면 CATS-LAB 디렉터리 하위에 `scripts`라는 디렉터리를 확인할 수 있습니다.  
@@ -96,12 +98,32 @@ $ git clone https://github.com/Derek-tjhwang/CATS-LAB.git
 배포하기 위한 전략을 추가하였다면, Dockerfile 이용하여 docker image 빌드한 후 Dockerhub private repository로 푸쉬합니다.  
 
  
+Dockerfile을 이용한 Docker Image 빌드 명령어는 다음과 같습니다. Dockerfile-coza라는 파일이 있는 디렉터리로 이동하여 다음 명령어를 실행합니다.
+
+```shell
+$ docker build -t <Private Repository> ./ -f Dockerfile-coza
+```  
+
+`<Private Repository>`에는 `<Dockerhub Username>/<Repository Name>:<tagname>` 형태로 지정합니다.  
+
+`<tagname>`을 지정하지 않는 경우 자동으로 latest로 지정됩니다.  
+
 
 
 
 ### Docker Image 푸시하기
 
-빌드한 docker image를 생성한 Private Repository에 푸시하기  
+위의 과정에서 빌드한 Docker Image를 Private Repository에 푸시하는 명령어는 다음과 같습니다.
+
+```shell
+$ docker push <Dockerhub Username>/<Repository Name>:<tagname>
+```
+
+Private Repository 페이지의 Docker commands 항목에서도 확인할 수 있습니다.  
+
+마찬가지로 `<tagname>`을 지정하지 않는 경우 자동으로 latest로 지정됩니다.  
+
+
 
 
 
