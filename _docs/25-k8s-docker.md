@@ -55,15 +55,47 @@ CATS Lab Bot 클러스터를 구축하기 이전에 Docker Hub 계정을 생성�
 
 ### Git 설치하기  
 
+[k8s Cluster on AWS with Kops](/catslab_docs/docs/k8s-kops_cluster/)의 과정을 따라 클러스터를 설치했다면, git이 자동으로 설치됐을 것입니다.  
+
+다음 명령어를 통해 Git이 제대로 설치되었는지를 확인합니다.  
+
+```shell
+$ git --version
+```
+
+제대로 설치되지 않은 경우는 다음 명령어를 통해 설치할 수 있습니다.
+
+```shell
+$ apt-get install git  
+```
+
+
 
 ### CATS Lab Package 클론하기  
-Git 이용하여 CATS Lab Package 클론하기
+
+Git 설치가 정상적으로 완료되었다면, Private Docker Image를 생성하기 위해 CATS Lab Package 클론을 진행합니다.  
+
+[CATS Lab Github](https://github.com/Derek-tjhwang/CATS-LAB) 사이트에서 git clone을 이용하여 CATS Lab 패키지를 내려받습니다.
+
+-----------------------------  
+```shell
+$ git clone https://github.com/Derek-tjhwang/CATS-LAB.git
+```    
+-----------------------------  
+
+![git clone [REPOSITORY]](https://user-images.githubusercontent.com/47657715/56722802-c3ce5700-6782-11e9-93f0-5e94b15e03a7.png) 
 
 
 
-### Docker Image 빌드하기
+### Docker Image 빌드하기  
 
-Dockerfile 이용하여 docker image 빌드하기  
+[Package Installation](/catslab_docs/docs/package-installation/)과 같이 내려 받은 CATS Lab 패키지를 정상적으로 설치했다면 CATS-LAB 디렉터리 하위에 `scripts`라는 디렉터리를 확인할 수 있습니다.  
+
+이 디렉터리 내부에 배포하고자하는 전략을 작성하여 추가합니다. 이때 파일이름의 형태는 `<Strategy Name>_entrypoint.py`과 같이 지정합니다.  
+
+배포하기 위한 전략을 추가하였다면, Dockerfile 이용하여 docker image 빌드한 후 Dockerhub private repository로 푸쉬합니다.  
+
+ 
 
 
 

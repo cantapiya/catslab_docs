@@ -25,7 +25,12 @@ $ aws s3api create-bucket \
 	--bucket <bucket name> \
 	--region ap-northeast-2 \
 	--create-bucket-configuration LocationConstraint=ap-northeast-2  
-  
+```
+-----------------------------  
+
+-----------------------------  
+```shell
+
 $ aws s3api put-bucket-versioning --bucket <bucket name> --versioning-configuration Status=Enabled  
 ```
 -----------------------------  
@@ -55,7 +60,7 @@ $ export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
 
 -----------------------------  
 ```shell
-$ export export NAME=<cluster name>  
+$ export NAME=<cluster name>  
 $ export KOPS_STATE_STORE=s3://<bucket name>   
 ```
 ----------------------------- 
