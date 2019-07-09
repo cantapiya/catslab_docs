@@ -137,10 +137,10 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 파일 시스템 인바운드 규칙을 수정하기 위해 `보안 그룹`으로 이동하여 다음과 같이 규칙을 수정합니다.  
 
 
-생성된 VPC를 확인하여, 보안 그룹 이름을 구분하기 위해 `NFS Storage`라고 변경합니다.
+생성된 파일 시스템의 `VPC ID` 를 확인한 뒤, 보안 그룹의 이름을 구분하기 위해 `NFS Storage` (혹은 구분하기 위한 이름)으로 변경합니다.
 
 
-유형은 `NFS`로 지정하고, 소스 항목에는 masters.<Cluster Name>.k8s.local로 생성된 보안 그룹과 nodes.<Cluster Name>.k8s.local로 생성된 보안 그룹의 `그룹 ID`를 각각 복사하여 추가합니다. 
+인바운드 규칙 편집(마우스 우 클릭을 하여 `인바운드 규칙 편집` 클릭)에서 유형은 `NFS`로 지정하고, 소스 항목에는 masters.<Cluster Name> .k8s.local로 생성된 보안 그룹과 nodes.<Cluster Name> .k8s.local로 생성된 보안 그룹의 `그룹 ID` 를 각각 복사하여 추가합니다. 
 
 ![image](https://user-images.githubusercontent.com/47657715/60856453-360eed80-a242-11e9-8b04-f5df9b53e814.png)
 
@@ -150,6 +150,42 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 
 ### CATS Lab config에 DNS 설정하기  
+
+생성한 파일 시스템의 인바운드 규칙을 변경하고, DNS 주소를 복사해 두었다면 다시 인스턴스로 접속하여 클러스터 생성에 필요한 리소스들의 배포를 진행합니다.  
+
+yaml 파일을 수정하기 위해 vim을 설치합니다.
+
+```shell
+$ sudo apt update  
+$ sudo apt install vim -y
+```
+![image](https://user-images.githubusercontent.com/47657715/60859267-ea157600-a24c-11e9-86da-e8469ddaf236.png)
+![image](https://user-images.githubusercontent.com/47657715/60859275-f4377480-a24c-11e9-857b-cdb29a101574.png)
+
+
+
+앞서 clone한 `botmanager` 디렉터리에서 `db` 디렉터리로 이동한 후 `postgres-storage.yaml`과 `postgres-deployment.yaml`파을을 수정합니다.
+
+
+
+![image](https://user-images.githubusercontent.com/47657715/60857017-09f46c00-a244-11e9-8c29-35a29bf1db58.png)
+
+`postgres-storage.yaml`의 `nfs - server`에는 파일 시스템을 생성한 후 복사해 둔 `DNS 주소`를 입력합니다.  
+
+`nfs - path`에는 다음과 같이 `"/"`로 입력합니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60859896-2a75f380-a24f-11e9-9bc6-27be7e0bd64c.png)
+
+<br>  
+
+`postgres-deployment.yaml`의 `volumeMounts - mountPath` 항목을 다음과 같이 `/data`로 변경합니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60859898-2c3fb700-a24f-11e9-8fab-16cb9f764b6b.png)
+
+<br>  
+
+
+ 
 
 
 ### ConfigMap과 deployment 수정하기  
