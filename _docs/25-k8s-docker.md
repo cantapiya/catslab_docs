@@ -104,16 +104,32 @@ Dockerfile을 이용한 Docker Image 빌드 명령어는 다음과 같습니다.
 $ docker build -t <Private Repository> ./ -f Dockerfile-coza
 ```  
 
-`<Private Repository>`에는 `<Dockerhub Username>/<Repository Name>:<tagname>` 형태로 지정합니다.  
+`<Private Repository>`에는 `<Docker Hub Username>/<Repository Name>:<tagname>` 형태로 지정합니다.  
 
 `<tagname>`을 지정하지 않는 경우 자동으로 latest로 지정됩니다.  
+
+
+
+### Docker 로그인하기  
+
+위에서 빌드한 Docker Image를 개인 저장소에 푸시하기 위해서는 Docker 로그인 과정이 필요합니다.  
+
+Docker 로그인을 위한 명령어는 다음과 같습니다.  
+
+```shell
+$ sudo docker login
+```
+
+![image](https://user-images.githubusercontent.com/47657715/60795789-4d4ccd00-a1a7-11e9-9860-debd9d7df6ab.png)
+
+`Username`와 `Password`에는 각각 Docker Hub 사용자 이름과 비밀번호를 입력합니다. 
 
 
 
 
 ### Docker Image 푸시하기
 
-위의 과정에서 빌드한 Docker Image를 Private Repository에 푸시하는 명령어는 다음과 같습니다.
+Docker 로그인을 완료한 뒤, 위의 과정에서 빌드한 Docker Image를 Private Repository에 푸시하는 명령어는 다음과 같습니다.
 
 ```shell
 $ docker push <Dockerhub Username>/<Repository Name>:<tagname>
