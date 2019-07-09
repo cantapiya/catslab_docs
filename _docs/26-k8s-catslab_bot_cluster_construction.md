@@ -95,7 +95,7 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 
 
-### AWS에서 파일시스템 생성하기  
+### AWS에서 파일 시스템 생성하기  
 
 클러스터에서 사용할 파일 시스템을 생성하기 위해 `AWS 서비스` 탭 에서 `스토리지-EFS`로 접근하여 파일 시스템 생성을 진행합니다.  
 
@@ -113,12 +113,17 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 ![image](https://user-images.githubusercontent.com/47657715/60854824-897e3d00-a23c-11e9-860e-896c6abbd3d4.png)
 
+<br>  
+
+
 2단계, 3단계에서는 변경사항없이 다음 단계를 진행합니다. 
 
 ![image](https://user-images.githubusercontent.com/47657715/60855452-bf242580-a23e-11e9-9155-2ff13919410c.png)
 ![image](https://user-images.githubusercontent.com/47657715/60855495-e2e76b80-a23e-11e9-8b61-d93486e03a8b.png)
 
 ![image](https://user-images.githubusercontent.com/47657715/60855533-0a3e3880-a23f-11e9-919d-d4eff12bd4c8.png)
+
+<br>  
 
 
 파일 시스템 생성을 완료한 뒤, 생성된 파일 시스템 정보를 조회하여 `DNS 이름` 항목의 주소를 복사해 둡니다.
@@ -127,7 +132,17 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 ![image](https://user-images.githubusercontent.com/47657715/60855705-bed85a00-a23f-11e9-948a-811791381e78.png)
 ![image](https://user-images.githubusercontent.com/47657715/60855708-c13ab400-a23f-11e9-9ba5-32c197fc50af.png)
 
+<br>  
 
+파일 시스템 인바운드 규칙을 수정하기 위해 `보안 그룹`으로 이동하여 다음과 같이 규칙을 수정합니다.  
+
+
+생성된 VPC를 확인하여, 보안 그룹 이름을 구분하기 위해 `NFS Storage`라고 변경합니다.
+
+
+유형은 `NFS`로 지정하고, 소스 항목에는 masters.<Cluster Name>.k8s.local로 생성된 보안 그룹과 nodes.<Cluster Name>.k8s.local로 생성된 보안 그룹의 `그룹 ID`를 각각 복사하여 추가합니다. 
+
+![image](https://user-images.githubusercontent.com/47657715/60856453-360eed80-a242-11e9-8b04-f5df9b53e814.png)
 
 <br>  
 
