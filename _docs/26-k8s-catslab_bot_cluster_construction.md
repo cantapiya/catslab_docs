@@ -1,5 +1,5 @@
 ---
-title: "04 CATS Lab Bot Cluster Construction"
+title: "05 CATS Lab Bot Cluster Construction"
 permalink: /docs/k8s-catslab_bot_cluster_construction/
 excerpt: "Construction of CATS Lab Bot Cluster"
 last_modified_at: 2019-06-19T12:30:00
@@ -89,7 +89,6 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 ```
 
 ![image](https://user-images.githubusercontent.com/47657715/60852995-2e951780-a235-11e9-9bcc-25de798563b6.png)
-
 ![image](https://user-images.githubusercontent.com/47657715/60853080-8b90cd80-a235-11e9-967c-f1578d585b95.png)
 
 <br>   
@@ -97,6 +96,42 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 
 ### AWS에서 파일시스템 생성하기  
+
+클러스터에서 사용할 파일 시스템을 생성하기 위해 `AWS 서비스` 탭 에서 `스토리지-EFS`로 접근하여 파일 시스템 생성을 진행합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60854110-fcd27f80-a239-11e9-8e7f-2ad7be960ab9.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60854206-49b65600-a23a-11e9-94e5-abd284469008.png)  
+
+
+파일 시스템 생성의 1단계에서는 생성할 파일 시스템의 VPC를 설정하는데, `보안 그룹` 탭에서 생성한 클러스터의 `VPC ID`를 확인 후 선택합니다.  
+
+가용 영역은 클러스터 가용 영역에서와 마찬가지로 `ap-northeast-2c` (서울)로 지정한 후 다음 단계를 선택합니다.
+
+
+![image](https://user-images.githubusercontent.com/47657715/60854488-6acb7680-a23b-11e9-97bf-cc166bc17599.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60854824-897e3d00-a23c-11e9-860e-896c6abbd3d4.png)
+
+2단계, 3단계에서는 변경사항없이 다음 단계를 진행합니다. 
+
+![image](https://user-images.githubusercontent.com/47657715/60855452-bf242580-a23e-11e9-9155-2ff13919410c.png)
+![image](https://user-images.githubusercontent.com/47657715/60855495-e2e76b80-a23e-11e9-8b61-d93486e03a8b.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60855533-0a3e3880-a23f-11e9-919d-d4eff12bd4c8.png)
+
+
+파일 시스템 생성을 완료한 뒤, 생성된 파일 시스템 정보를 조회하여 `DNS 이름` 항목의 주소를 복사해 둡니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60855701-bd0e9680-a23f-11e9-857b-e908f1f0ffba.png)
+![image](https://user-images.githubusercontent.com/47657715/60855705-bed85a00-a23f-11e9-948a-811791381e78.png)
+![image](https://user-images.githubusercontent.com/47657715/60855708-c13ab400-a23f-11e9-9ba5-32c197fc50af.png)
+
+
+
+<br>  
+
+
 
 
 ### CATS Lab config에 DNS 설정하기  
