@@ -178,9 +178,9 @@ $ sudo apt install vim -y
 
 <br>  
 
-`postgres-deployment.yaml`의 `volumeMounts - mountPath` 항목을 다음과 같이 `/data`로 변경합니다.
+`postgres-deployment.yaml`의 `volumeMounts - mountPath` 항목을 다음과 같이 `/data`로 변경하고, `envFrom` 항목들을 모두 주석처리 합니다.  
 
-![image](https://user-images.githubusercontent.com/47657715/60859898-2c3fb700-a24f-11e9-8fab-16cb9f764b6b.png)
+![image](https://user-images.githubusercontent.com/47657715/60862562-e1c33800-a258-11e9-997e-5cf4b1a3114c.png)
 
 <br>  
 
@@ -209,7 +209,7 @@ $ kubectl apply -f postgres-deployment.yaml
 
 ![image](https://user-images.githubusercontent.com/47657715/60861312-f56c9f80-a254-11e9-9a4c-3bfdd71fd9cd.png)
 
-파드의 `postgres-xxx`를 클릭하면 파드 상세보기 페이지로 이동하고, `EXEC`를 이용하여 postgres 컨테이너의 터미널로 접속할 수 있습니다.  
+파드의 `postgres-xxx`를 클릭하면 파드 상세보기 페이지로 이동하고, `EXEC` 버튼을 이용하여 postgres 컨테이너의 터미널로 접속할 수 있습니다.  
 
 ![image](https://user-images.githubusercontent.com/47657715/60861388-41b7df80-a255-11e9-96b0-8d51b0877e94.png)
 ![image](https://user-images.githubusercontent.com/47657715/60861395-4aa8b100-a255-11e9-86e9-aa9b50d8f967.png)
@@ -217,19 +217,31 @@ $ kubectl apply -f postgres-deployment.yaml
 
 postgres 컨테이너 터미널로 접속하였다면, root 디렉터리에서 `mkdir` 명령어를 이용하여 다음과 같이 하위 디렉터리를 생성합니다.  
 
+`/data/data/db/postgresql`  
+`/data/data/config`  
+
+
 ![image](https://user-images.githubusercontent.com/47657715/60861445-7b88e600-a255-11e9-8389-7b8899c710f0.png)
-![image](https://user-images.githubusercontent.com/47657715/60861448-7d52a980-a255-11e9-876f-205dd9645bb4.png) 
+![image](https://user-images.githubusercontent.com/47657715/60862684-454d6580-a259-11e9-94af-6628c41fa1c3.png)  
+
+
 
 하위 디렉터리를 생성한 뒤, 다시 ubuntu 터미널에서 다음 명령어를 이용하여 설치한 kubernetes 클러스터의 config 파일을 postgres 컨테이너로 복사합니다.  
 
-![image](https://user-images.githubusercontent.com/47657715/60861623-010c9600-a256-11e9-8339-662ea1d7337a.png)
+`<Postgres Pod Name>`에는 postgres 파드를 클릭하였을 때 파드 상세 페이지에서 확인할 수 있는 파드 이름을 입력합니다.
+
+```shell
+$ kubectl cp /home/ubuntu/.kube/config default/<Postgres Pod Name>:/data/data/config/kube_config  
+```
+
+![image](https://user-images.githubusercontent.com/47657715/60862238-ee935c00-a257-11e9-81d3-d8a437625789.png)
 
 
 config 파일을 복사한 뒤 postgres 터미널에서 확인하면 다음과 같이 kube_config 파일로 복사된 것을 확인할 수 있습니다.  
 
 ![image](https://user-images.githubusercontent.com/47657715/60861778-7710fd00-a256-11e9-91cf-cd7178c8a7c9.png)  
 
-
+<br>  
 
 
 
