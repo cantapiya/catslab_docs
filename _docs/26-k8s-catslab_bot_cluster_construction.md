@@ -247,13 +247,26 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 `postgres-storage.yaml`파일과 `postgres-deployment.yaml`파일을 다음과 같이 다시 수정합니다.
 
+
+![image](https://user-images.githubusercontent.com/47657715/60866514-7fbc0000-a263-11e9-836b-27364c3a17f7.png)
+![image](https://user-images.githubusercontent.com/47657715/60866534-8d718580-a263-11e9-8597-9efd3b6d8c10.png)
+
+
+
 수정 후 `kubectl delete` 명령어를 이용하여 배포한 리소스들을 삭제한 후 다시 배포합니다.
 
+같은 디렉터리의 `redis-deployment.yaml`과 `redis-service.yaml`도 함께 배포합니다.  
 
- 
+![image](https://user-images.githubusercontent.com/47657715/60874366-dd0b7d80-a272-11e9-9ec6-3c9b6aec79ec.png)
+
+`redis`까지 배포를 완료하면, kubernetes 대시보드에서 다음과 같이 배포중인 디플로이먼트, 파드, 레플리카 셋, 서비스, 퍼시스턴스 볼륨 클레임, 시크릿 등과 같은 리소스를 확인할 수 있습니다.  
 
 
-### 포트 추가하기 (문의)  
+![image](https://user-images.githubusercontent.com/47657715/60874434-fad8e280-a272-11e9-9155-a7398cdb8827.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60874437-fc0a0f80-a272-11e9-9efd-b5c2f82bf5c1.png)
+
+
 
 
 
@@ -265,9 +278,61 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 postgres 컨테이너 터미널로 접속하여 다음과 같은 설정을 진행합니다.  
 
+```shell
+$ su postgres
+$ psql 
+```
+
+```shell
+postgres=# ALTER USER postgres with encrpted password '<Password>';
+postgres=# create database <Database Name>;
+postgres=# \l
+```
+
+`create database` 명령어를 실행 후 database가 잘 생성되었는지 확인하기 위해 `\l` 명령어를 입력하여 database 목록을 확인합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60872090-088c6900-a26f-11e9-8bdf-68f9282b6aab.png)
+
+
+<Database Name>에는 생성할 database의 이름을 입력합니다.  
+
+
 postgres DB 계정과 비밀번호를 설정하고 vim을 설치한 후 pg_hba.conf 파일에 아래와 같은 내용을 추가합니다.  
 
-설정한 postgres 계정과 비밀번호를 `catslab-config.yaml` 파일에 추가하고 배포를 진행합니다. 
+![image](https://user-images.githubusercontent.com/47657715/60872152-2b1e8200-a26f-11e9-8cbf-23db6483eaea.png)
+![image](https://user-images.githubusercontent.com/47657715/60872159-2d80dc00-a26f-11e9-817e-6cc93a84d453.png)
+
+
+![image](https://user-images.githubusercontent.com/47657715/60872181-383b7100-a26f-11e9-8efd-f3f7f9ee45fc.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60872497-b861d680-a26f-11e9-994d-c040152a0f0c.png)
+
+
+아래와 같이 `catslab-configmap.yaml`의 기본 템플릿에서 각 부분을 수정합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60872948-8e5ce400-a270-11e9-9fc9-54229a121652.png)
+
+`K8S_BOT_IMAGE`에는 Docker Hub 개인 저장소에 푸시한 Docker Image를 입력합니다.  
+
+`K8S_BOT_NAMESPACE`에는 Secret을 export한 네임스페이스인 `coza-bot`으로 입력합니다.  
+
+`K8S_IMG_PULL_SECRET`에는 생성한 Secret 리소스의 이름을 입력합니다.  
+
+`POSTGRES_DB`에는 postgres 컨테이너 터미널에서 생성한 database의 이름을 입력합니다.
+
+`POSTGRES_USER`에는 `postgres`를 입력하고, `POSTGRES_PASSWORD`에는 database를 생성할 때 입력한 비밀번호를 입력합니다.
+
+입력한 예시는 다음과 같습니다. 
+
+![image](https://user-images.githubusercontent.com/47657715/60873613-a3864280-a271-11e9-9232-c95d7fe62163.png)
+   
+
+`catslab-configmap.yaml` 파일을 수정한 뒤 다음 명령어를 이용하여 배포를 진행합니다.  
+
+```shell
+$ kubectl apply -f catslab-configmap.yaml
+```
+
 
 
 
@@ -302,6 +367,11 @@ django migration과 superuser까지 잘 생성했다면, 나머지 celery 관련
 ### 확인  
 
 모든 리소스의 배포가 정상적으로 진행되었다면, kubernetes 대시보드에서 다음과 같이 배포된 리소스들을 확인할 수 있습니다.
+
+
+
+### 포트 추가하기 (문의)  
+
 
 
 
