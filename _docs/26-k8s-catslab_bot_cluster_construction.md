@@ -245,7 +245,7 @@ config 파일을 복사한 뒤 postgres 터미널에서 확인하면 다음과 �
 
 config 파일을 postgres 컨테이너로 복사한 후 
 
-`postgres-storage.yaml`파일과 `postgres-deployment.yaml`파일을 다음과 같이 다시 수정합니다.
+`postgres-storage.yaml`파일과 `postgres-deployment.yaml`파일을 다음과 같이 다시 수정합니다.  
 
 
 ![image](https://user-images.githubusercontent.com/47657715/60866514-7fbc0000-a263-11e9-836b-27364c3a17f7.png)
@@ -294,10 +294,11 @@ postgres=# \l
 ![image](https://user-images.githubusercontent.com/47657715/60872090-088c6900-a26f-11e9-8bdf-68f9282b6aab.png)
 
 
-<Database Name>에는 생성할 database의 이름을 입력합니다.  
+<Database Name> 에는 생성할 database의 이름을 입력합니다.  
 
 
-postgres DB 계정과 비밀번호를 설정하고 vim을 설치한 후 pg_hba.conf 파일에 아래와 같은 내용을 추가합니다.  
+postgres DB 이름과 비밀번호를 설정하고 vim을 설치한 후 pg_hba.conf 파일에 아래와 같은 내용을 추가합니다.  
+
 
 ![image](https://user-images.githubusercontent.com/47657715/60872152-2b1e8200-a26f-11e9-8cbf-23db6483eaea.png)
 ![image](https://user-images.githubusercontent.com/47657715/60872159-2d80dc00-a26f-11e9-817e-6cc93a84d453.png)
