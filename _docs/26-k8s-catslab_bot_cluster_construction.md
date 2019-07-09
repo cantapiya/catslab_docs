@@ -243,48 +243,69 @@ config 파일을 복사한 뒤 postgres 터미널에서 확인하면 다음과 �
 
 <br>  
 
+config 파일을 postgres 컨테이너로 복사한 후 
+
+`postgres-storage.yaml`파일과 `postgres-deployment.yaml`파일을 다음과 같이 다시 수정합니다.
+
+수정 후 `kubectl delete` 명령어를 이용하여 배포한 리소스들을 삭제한 후 다시 배포합니다.
 
 
  
 
 
-### ConfigMap과 deployment 수정하기  
-
-
-
-
-### postgres 배포하기  
-
-
-### 대시보드 접속하여 postgres 컨테이너 접속하기  
-
-
-
-### config 수정, data 디렉터리 생성 후 마운트 경로 변경하기
-
-
-### AWS 인바운드 규칙 추가하기
-
-
 ### 포트 추가하기 (문의)  
 
 
-### postgres config 복사하기
 
 
 ### nginx 배포하기  
+
+`storage.yaml`과 `deployment.yaml`을 수정하고 배포한 후 nginx 배포를 진행합니다.
+
+
+postgres 컨테이너 터미널로 접속하여 다음과 같은 설정을 진행합니다.  
+
+postgres DB 계정과 비밀번호를 설정하고 vim을 설치한 후 pg_hba.conf 파일에 아래와 같은 내용을 추가합니다.  
+
+설정한 postgres 계정과 비밀번호를 `catslab-config.yaml` 파일에 추가하고 배포를 진행합니다. 
+
 
 
 
 ### django 배포하기  
 
+위의 과정까지 완료하였다면, django deployment와 service를 배포하기 위한 준비가 완료되었습니다.  
+
+django 디렉터리로 이동하여 다음과 같이 yaml 파일을 수정한 후 배포를 진행합니다.  
+
+
+
+배포가 정상적으로 완료되었다면 다시 kubernetes 대시보드에서 django 컨테이너 터미널로 접속할 수 있습니다.  
+
+
+
+
+
+
 
 ### django 컨테이너 접속해서 migration 및 django 서버 계정 생성하기  
+
+django 컨테이너의 터미널로 접속하여 다음과 같은 과정을 진행합니다.  
+
 
 
 ### celery 배포하기
 
+django migration과 superuser까지 잘 생성했다면, 나머지 celery 관련 리소스의 배포를 진행합니다.
 
 
-### 확인 
+### 확인  
+
+모든 리소스의 배포가 정상적으로 진행되었다면, kubernetes 대시보드에서 다음과 같이 배포된 리소스들을 확인할 수 있습니다.
+
+
+
+### bot 실행  
+
+
 
