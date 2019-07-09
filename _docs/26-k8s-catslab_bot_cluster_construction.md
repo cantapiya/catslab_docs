@@ -21,6 +21,7 @@ $ kops validate cluster
 
 사전 준비과정을 모두 완료하였다면, 다음 과정을 통해 CATS Lab Bot Cluster를 구축할 수 있습니다. 
 
+<br>  
 
 
 ### kops 클러스터 네임스페이스 생성하기  
@@ -32,6 +33,7 @@ $ kubectl create namespace coza-bot
 ```
 ![image](https://user-images.githubusercontent.com/47657715/60851961-c04e5600-a230-11e9-99d5-aa2bf41bea66.png)  
 
+<br>  
 
 
 ### k8s Secret 리소스 생성하기  
@@ -62,6 +64,7 @@ $ kubectl get namespace
 
 ![image](https://user-images.githubusercontent.com/47657715/60852503-eaa11300-a232-11e9-89f0-810a1839e8df.png)
 
+<br>  
 
 
 ### 특정 네임스페이스로 Secret 리소스 export하기  
@@ -74,10 +77,23 @@ $ kubectl get secret regcred --namespace=default --export -o yaml | kubectl appl
 
 ![image](https://user-images.githubusercontent.com/47657715/60852675-a9f5c980-a233-11e9-9292-71bcf45c7637.png)
 
-
+<br>  
 
 
 ### Git 이용하여 Botmanager clone하기  
+
+CATS Lab Bot Cluster를 구성하는 여러 kubernetes 리소스들을 배포하기 위해 [CATS Lab Botmanager Github](https://github.com/Derek-tjhwang/botmanager) 사이트에서 git clone을 이용하여 배포에 필요한 `yaml` 파일들을 내려받습니다.
+
+```shell
+$ git clone https://github.com/Derek-tjhwang/botmanager.git
+```
+
+![image](https://user-images.githubusercontent.com/47657715/60852995-2e951780-a235-11e9-9bcc-25de798563b6.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60853080-8b90cd80-a235-11e9-967c-f1578d585b95.png)
+
+<br>   
+
 
 
 ### AWS에서 파일시스템 생성하기  
