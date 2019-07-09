@@ -149,7 +149,7 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 
 
-### CATS Lab config에 DNS 설정하기  
+### DB storage, deployment, service 배포하기  
 
 생성한 파일 시스템의 인바운드 규칙을 변경하고, DNS 주소를 복사해 두었다면 다시 인스턴스로 접속하여 클러스터 생성에 필요한 리소스들의 배포를 진행합니다.  
 
@@ -185,10 +185,60 @@ $ sudo apt install vim -y
 <br>  
 
 
+yaml 파일을 수정 후 다음 명령어를 통해 각각의 yaml 파일을 배포합니다.
+
+```shell
+$ kubectl apply -f postgres-storage.yaml
+$ kubectl apply -f postgres-deployment.yaml
+```
+
+
+![image](https://user-images.githubusercontent.com/47657715/60860330-fef40880-a250-11e9-82c2-2555e2cf2609.png)
+![image](https://user-images.githubusercontent.com/47657715/60860337-03202600-a251-11e9-8630-9cd92ee3f9eb.png)
+
+<br>  
+
+`postgres-storage.yaml`을 배포하면 다음과 같이 `kubectl get pv` 명령어를 통해 `postgres-pv-volume`이 생성된 것을 확인할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60860335-00bdcc00-a251-11e9-87f6-fcf7c9a04950.png)
+
+<br>  
+
+
+두 개의 리소스를 배포한 후 [k8s Dashboard](/docs/k8s-dashboard/)에서 설치한 대시보드에 접속하면 다음과 같이 디플로이먼트, 파드, 레플리카 셋들이 배포된 것을 확인할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60861312-f56c9f80-a254-11e9-9a4c-3bfdd71fd9cd.png)
+
+파드의 `postgres-xxx`를 클릭하면 파드 상세보기 페이지로 이동하고, `EXEC`를 이용하여 postgres 컨테이너의 터미널로 접속할 수 있습니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60861388-41b7df80-a255-11e9-96b0-8d51b0877e94.png)
+![image](https://user-images.githubusercontent.com/47657715/60861395-4aa8b100-a255-11e9-86e9-aa9b50d8f967.png)
+
+
+postgres 컨테이너 터미널로 접속하였다면, root 디렉터리에서 `mkdir` 명령어를 이용하여 다음과 같이 하위 디렉터리를 생성합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60861445-7b88e600-a255-11e9-8389-7b8899c710f0.png)
+![image](https://user-images.githubusercontent.com/47657715/60861448-7d52a980-a255-11e9-876f-205dd9645bb4.png) 
+
+하위 디렉터리를 생성한 뒤, 다시 ubuntu 터미널에서 다음 명령어를 이용하여 설치한 kubernetes 클러스터의 config 파일을 postgres 컨테이너로 복사합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60861623-010c9600-a256-11e9-8339-662ea1d7337a.png)
+
+
+config 파일을 복사한 뒤 postgres 터미널에서 확인하면 다음과 같이 kube_config 파일로 복사된 것을 확인할 수 있습니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60861778-7710fd00-a256-11e9-91cf-cd7178c8a7c9.png)  
+
+
+
+
+
  
 
 
 ### ConfigMap과 deployment 수정하기  
+
+
 
 
 ### postgres 배포하기  
