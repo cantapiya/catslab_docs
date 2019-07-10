@@ -153,7 +153,8 @@ $ git clone https://github.com/Derek-tjhwang/botmanager.git
 
 생성한 파일 시스템의 인바운드 규칙을 변경하고, DNS 주소를 복사해 두었다면 다시 인스턴스로 접속하여 클러스터 생성에 필요한 리소스들의 배포를 진행합니다.  
 
-yaml 파일을 수정하기 위해 vim을 설치합니다.
+<!--
+yaml 파일을 수정하기 위해 vim을 설치합니다. (vim이 설치가 되지 않은 경우)
 
 ```shell
 $ sudo apt update  
@@ -161,16 +162,16 @@ $ sudo apt install vim -y
 ```
 ![image](https://user-images.githubusercontent.com/47657715/60859267-ea157600-a24c-11e9-86da-e8469ddaf236.png)
 ![image](https://user-images.githubusercontent.com/47657715/60859275-f4377480-a24c-11e9-857b-cdb29a101574.png)
+-->
 
 
-
-앞서 clone한 `botmanager` 디렉터리에서 `db` 디렉터리로 이동한 후 `postgres-storage.yaml`과 `postgres-deployment.yaml`파을을 수정합니다.
+앞서 clone한 `botmanager` 디렉터리에서 `db` 디렉터리로 이동한 후 `postgres-storage.yaml`과 `postgres-deployment.yaml`파을을 수정합니다.  
 
 
 
 ![image](https://user-images.githubusercontent.com/47657715/60857017-09f46c00-a244-11e9-8c29-35a29bf1db58.png)
 
-`postgres-storage.yaml`의 `nfs - server`에는 파일 시스템을 생성한 후 복사해 둔 `DNS 주소`를 입력합니다.  
+`postgres-storage.yaml`의 `nfs - server`에는 파일 시스템을 생성한 후 복사해 둔 `DNS 이름`를 입력합니다.  
 
 `nfs - path`에는 다음과 같이 `"/"`로 입력합니다.
 
@@ -275,12 +276,75 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 
 
-### nginx 배포하기  
+### configmap과 storage 배포하기  
 
-`storage.yaml`과 `deployment.yaml`을 수정하고 배포한 후 nginx 배포를 진행합니다.
+아래와 같이 `catslab-configmap.yaml`의 기본 템플릿에서 각 부분을 수정합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60872948-8e5ce400-a270-11e9-9fc9-54229a121652.png)
+
+`K8S_BOT_IMAGE`에는 Docker Hub 개인 저장소에 푸시한 Docker Image를 입력합니다.  
+
+`K8S_BOT_NAMESPACE`에는 Secret을 export한 네임스페이스인 `coza-bot`으로 입력합니다.  
+
+`K8S_IMG_PULL_SECRET`에는 생성한 Secret 리소스의 이름을 입력합니다.  
+
+`POSTGRES_DB`에는 postgres 컨테이너 터미널에서 생성한 database의 이름을 입력합니다.
+
+`POSTGRES_USER`에는 `postgres`를 입력하고, `POSTGRES_PASSWORD`에는 database를 생성할 때 입력한 비밀번호를 입력합니다.
+
+입력한 예시는 다음과 같습니다. 
+
+![image](https://user-images.githubusercontent.com/47657715/60941366-e26fd300-a319-11e9-8679-f14d4cca6d28.png)
+   
+
+`catslab-configmap.yaml` 파일을 수정한 뒤 다음 명령어를 이용하여 배포를 진행합니다.  
+
+```shell
+$ kubectl apply -f catslab-configmap.yaml
+```
 
 
-postgres 컨테이너 터미널로 접속하여 다음과 같은 설정을 진행합니다.  
+같은 디렉터리의 `storage.yaml` 파일도 다음과 같이 수정하여 배포합니다.
+
+![image](https://user-images.githubusercontent.com/47657715/60941622-b7d24a00-a31a-11e9-87df-10d575817f4e.png)
+
+`nfs - server` 항목에 `postgres-storage.yaml`에서 입력한 `DNS 이름`과 같은 정보를 입력합니다.
+
+```shell
+$ kubectl apply -f storage.yaml
+```
+
+![image](https://user-images.githubusercontent.com/47657715/60941906-a3428180-a31b-11e9-99b5-b2695a214c04.png)
+
+<br>  
+
+
+
+### django 배포하기  
+
+`catslab-configmap.yaml`과 `storage.yaml`를 수정하고 배포를 완료하였다면, django deployment와 service 리소스를 배포하기 위한 준비가 완료되었습니다.  
+
+django 디렉터리로 이동하여 `deployment.yaml`과 `service.yaml`를 배포합니다.  
+
+```shell
+$ kubectl apply -f deployment.yaml
+$ kubectl apply -f service.yaml
+```
+
+![image](https://user-images.githubusercontent.com/47657715/60941911-a50c4500-a31b-11e9-8b83-1caf3a53195c.png)  
+
+
+다음과 같이 kubernetes 대시보드 화면에서 디플로이먼트 리소스가 정상적으로 배포됐는지를 확인할 수 있습니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60941939-c0775000-a31b-11e9-929f-36b6f80f1fcc.png)
+
+
+
+
+
+### postgres DB 생성하기
+
+이전과 마찬가지로 kubernetes 대시보드의 파드 목록 중 postgres 컨테이너 터미널로 접속하여 다음과 같은 설정을 진행합니다.  
 
 ```shell
 $ su postgres
@@ -312,44 +376,13 @@ postgres database를 생성하고 vim을 설치한 후 `/var/lib/postgresql/data
 ![image](https://user-images.githubusercontent.com/47657715/60872497-b861d680-a26f-11e9-994d-c040152a0f0c.png)
 
 
-아래와 같이 `catslab-configmap.yaml`의 기본 템플릿에서 각 부분을 수정합니다.  
-
-![image](https://user-images.githubusercontent.com/47657715/60872948-8e5ce400-a270-11e9-9fc9-54229a121652.png)
-
-`K8S_BOT_IMAGE`에는 Docker Hub 개인 저장소에 푸시한 Docker Image를 입력합니다.  
-
-`K8S_BOT_NAMESPACE`에는 Secret을 export한 네임스페이스인 `coza-bot`으로 입력합니다.  
-
-`K8S_IMG_PULL_SECRET`에는 생성한 Secret 리소스의 이름을 입력합니다.  
-
-`POSTGRES_DB`에는 postgres 컨테이너 터미널에서 생성한 database의 이름을 입력합니다.
-
-`POSTGRES_USER`에는 `postgres`를 입력하고, `POSTGRES_PASSWORD`에는 database를 생성할 때 입력한 비밀번호를 입력합니다.
-
-입력한 예시는 다음과 같습니다. 
-
-![image](https://user-images.githubusercontent.com/47657715/60873613-a3864280-a271-11e9-9232-c95d7fe62163.png)
-   
-
-`catslab-configmap.yaml` 파일을 수정한 뒤 다음 명령어를 이용하여 배포를 진행합니다.  
-
-```shell
-$ kubectl apply -f catslab-configmap.yaml
-```
 
 
 
 
+### django migration하기
 
-### django 배포하기  
-
-위의 과정까지 완료하였다면, django deployment와 service를 배포하기 위한 준비가 완료되었습니다.  
-
-django 디렉터리로 이동하여 다음과 같이 yaml 파일을 수정한 후 배포를 진행합니다.  
-
-
-
-배포가 정상적으로 완료되었다면 다시 kubernetes 대시보드에서 django 컨테이너 터미널로 접속할 수 있습니다.  
+kubernetes 대시보드에서 정상적으로 배포된 django 파드들을 확인하고, django 컨테이너 터미널로 접속할 수 있습니다.  
 
 
 
