@@ -249,11 +249,15 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 
 ![image](https://user-images.githubusercontent.com/47657715/60866514-7fbc0000-a263-11e9-836b-27364c3a17f7.png)
+
 ![image](https://user-images.githubusercontent.com/47657715/60866534-8d718580-a263-11e9-8597-9efd3b6d8c10.png)
 
 
 
 수정 후 `kubectl delete` 명령어를 이용하여 배포한 리소스들을 삭제한 후 다시 배포합니다.
+
+
+
 
 같은 디렉터리의 `redis-deployment.yaml`과 `redis-service.yaml`도 함께 배포합니다.  
 
