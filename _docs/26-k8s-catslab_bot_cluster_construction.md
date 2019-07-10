@@ -286,17 +286,17 @@ $ psql
 ```shell
 postgres=# ALTER USER postgres with encrpted password '<Password>';
 postgres=# create database <Database Name>;
-postgres=# \l
+postgres=# \l  
 ```
 
-<Database Name> 에는 생성할 database의 이름을 입력합니다.  
+`<Database Name>` 에는 생성할 database의 이름을 입력합니다.  
 
 `create database` 명령어를 실행 후 database가 잘 생성되었는지 확인하기 위해 `\l` 명령어를 입력하여 database 목록을 확인합니다.  
 
 ![image](https://user-images.githubusercontent.com/47657715/60872090-088c6900-a26f-11e9-8bdf-68f9282b6aab.png)
 
 
-postgres DB 이름과 비밀번호를 설정하고 vim을 설치한 후 `pg_hba.conf` 파일에 아래와 같은 내용을 추가합니다.  
+postgres database를 생성하고 vim을 설치한 후 `/var/lib/postgresql/data` path로 이동한 후 `pg_hba.conf` 파일에 아래와 같은 내용을 추가합니다.  
 
 
 ![image](https://user-images.githubusercontent.com/47657715/60872152-2b1e8200-a26f-11e9-8cbf-23db6483eaea.png)
