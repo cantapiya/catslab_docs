@@ -257,7 +257,8 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 수정 후 `kubectl delete` 명령어를 이용하여 배포한 리소스들을 삭제한 후 다시 배포합니다.
 
-
+![image](https://user-images.githubusercontent.com/47657715/60942684-78a5f800-a31e-11e9-8419-ea8a84b88b53.png)
+![image](https://user-images.githubusercontent.com/47657715/60942685-79d72500-a31e-11e9-89e0-328d11576812.png)
 
 
 같은 디렉터리의 `redis-deployment.yaml`과 `redis-service.yaml`도 함께 배포합니다.  
@@ -286,7 +287,7 @@ config 파일을 postgres 컨테이너로 복사한 후
 
 `K8S_BOT_NAMESPACE`에는 Secret을 export한 네임스페이스인 `coza-bot`으로 입력합니다.  
 
-`K8S_IMG_PULL_SECRET`에는 생성한 Secret 리소스의 이름을 입력합니다.  
+`K8S_IMG_PULL_SECRET`에는 생성한 Secret 리소스의 이름(`regcred`)을 입력합니다.  
 
 `POSTGRES_DB`에는 postgres 컨테이너 터미널에서 생성한 database의 이름을 입력합니다.
 
@@ -303,6 +304,7 @@ config 파일을 postgres 컨테이너로 복사한 후
 $ kubectl apply -f catslab-configmap.yaml
 ```
 
+<br>  
 
 같은 디렉터리의 `storage.yaml` 파일도 다음과 같이 수정하여 배포합니다.
 
@@ -322,7 +324,7 @@ $ kubectl apply -f storage.yaml
 
 ### django 배포하기  
 
-`catslab-configmap.yaml`과 `storage.yaml`를 수정하고 배포를 완료하였다면, django deployment와 service 리소스를 배포하기 위한 준비가 완료되었습니다.  
+`catslab-configmap.yaml`과 `storage.yaml`를 수정하고 배포를 완료하였다면, django 디플로이먼트와 서비스 리소스를 배포하기 위한 준비가 완료되었습니다.  
 
 django 디렉터리로 이동하여 `deployment.yaml`과 `service.yaml`를 배포합니다.  
 
@@ -338,7 +340,7 @@ $ kubectl apply -f service.yaml
 
 ![image](https://user-images.githubusercontent.com/47657715/60941939-c0775000-a31b-11e9-929f-36b6f80f1fcc.png)
 
-
+<br>  
 
 
 
@@ -361,7 +363,7 @@ postgres=# \l
 
 `create database` 명령어를 실행 후 database가 잘 생성되었는지 확인하기 위해 `\l` 명령어를 입력하여 database 목록을 확인합니다.  
 
-![image](https://user-images.githubusercontent.com/47657715/60872090-088c6900-a26f-11e9-8bdf-68f9282b6aab.png)
+![image](https://user-images.githubusercontent.com/47657715/60942948-77c19600-a31f-11e9-9861-1849e45ce8ec.png)
 
 
 postgres database를 생성하고 vim을 설치한 후 `/var/lib/postgresql/data` path로 이동한 후 `pg_hba.conf` 파일에 아래와 같은 내용을 추가합니다.  
@@ -375,8 +377,7 @@ postgres database를 생성하고 vim을 설치한 후 `/var/lib/postgresql/data
 
 ![image](https://user-images.githubusercontent.com/47657715/60872497-b861d680-a26f-11e9-994d-c040152a0f0c.png)
 
-
-
+<br>  
 
 
 
@@ -384,30 +385,85 @@ postgres database를 생성하고 vim을 설치한 후 `/var/lib/postgresql/data
 
 kubernetes 대시보드에서 정상적으로 배포된 django 파드들을 확인하고, django 컨테이너 터미널로 접속할 수 있습니다.  
 
+배포된 django 파드중 노드의 IP가 다른 하나의 파드를 선택합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60943199-2cf44e00-a320-11e9-998d-e56135e8962c.png)
+
+
+`EXEC` 버튼을 이용하여 터미널로 접속하여 `migration` 과정을 진행합니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60943311-878daa00-a320-11e9-9c2c-cc64ea60f1a9.png)
+
+![image](https://user-images.githubusercontent.com/47657715/60943464-13073b00-a321-11e9-8dad-a6c03f87fa8e.png)
+![image](https://user-images.githubusercontent.com/47657715/60943510-3336fa00-a321-11e9-80e1-e215202cfc75.png)
+
+
+명령어는 다음과 같습니다.
+
+```shell
+# python3 manage.py makemigrations
+# python3 manage.py migrate
+```
+![image](https://user-images.githubusercontent.com/47657715/60943621-7ee9a380-a321-11e9-84bc-b806af555b34.png)
+![image](https://user-images.githubusercontent.com/47657715/60943625-80b36700-a321-11e9-9d71-fda67225551f.png)
+
+
+정상적으로 `migration`이 완료되었다면 `nginx` 관리자 페이지에서 사용할 `superuser` 생성을 진행합니다.
+
+```shell
+# python3 manage.py createsuperuser
+```
+![image](https://user-images.githubusercontent.com/47657715/60943626-827d2a80-a321-11e9-80fd-70a5b5f33fc0.png)
+
+<br>  
 
 
 
+### nginx, celery 배포하기  
+
+django migration과 superuser 생성까지 완료했다면, nginx와 celery 관련 리소스도 배포합니다.
+
+각각 `nginx` 디렉터리와 `celery` 디렉터리로 이동하여 다음 명령어를 이용합니다.  
+
+__`nginx` 디렉터리__  
+```shell
+$ kubectl apply -f deployment.yaml
+$ kubectl apply -f service.yaml
+```
+
+__`celery` 디렉터리__  
+```shell
+$ kubectl apply -f worker.yaml
+```
 
 
+![image](https://user-images.githubusercontent.com/47657715/60943806-0afbcb00-a322-11e9-9917-16f4a2ee4728.png)
 
-### django 컨테이너 접속해서 migration 및 django 서버 계정 생성하기  
+![image](https://user-images.githubusercontent.com/47657715/60943808-0cc58e80-a322-11e9-8da6-c3cd1e5665d3.png)
 
-django 컨테이너의 터미널로 접속하여 다음과 같은 과정을 진행합니다.  
+<br>  
 
-
-
-### celery 배포하기
-
-django migration과 superuser까지 잘 생성했다면, 나머지 celery 관련 리소스의 배포를 진행합니다.
 
 
 ### 확인  
 
-모든 리소스의 배포가 정상적으로 진행되었다면, kubernetes 대시보드에서 다음과 같이 배포된 리소스들을 확인할 수 있습니다.
+모든 리소스의 배포가 정상적으로 진행되었다면, kubernetes 대시보드에서 다음과 같이 배포된 리소스들을 확인할 수 있습니다.  
+
+
+![image](https://user-images.githubusercontent.com/47657715/60944215-27e4ce00-a323-11e9-8338-140635c6e198.png)
+![image](https://user-images.githubusercontent.com/47657715/60944224-2adfbe80-a323-11e9-9989-e0f341360ca6.png)
+
+AWS 인스턴스 터미널에서도 `kubectl` 명령어를 통해서도 확인할 수 있습니다.  
+
+![image](https://user-images.githubusercontent.com/47657715/60944332-7abe8580-a323-11e9-93f5-3eef86387520.png)
+![image](https://user-images.githubusercontent.com/47657715/60944333-7befb280-a323-11e9-93e0-3a8b971fae9b.png)
+![image](https://user-images.githubusercontent.com/47657715/60944336-7d20df80-a323-11e9-8ce6-d6f54680f43c.png)
 
 
 
-### 포트 추가하기 (문의)  
+
+### 보안그룹 인바운드 규칙 추가하기 (문의)  
+
 
 
 
