@@ -15,35 +15,36 @@ Initialize 함수의 작성 형식은 다음과 같은 형식을 가지며,
 
 ```python
 def initialize(self):
-	self.context['trade_info'] = {"EXCHANGE_NAME_1": {
-					"currency": [], 
-					"interval": [],
-					"fiat": FIAT
-					},
+    self.context['trade_info'] = {
+                                  "EXCHANGE_NAME_1": {
+				      "currency": [], 
+				      "interval": [],
+				      "fiat": FIAT
+				  },
 				"EXCHANGE_NAME_2": {
-					"currency": [],
-					"interval": [],
-					"fiat": FIAT
-					},
+				    "currency": [],
+				    "interval": [],
+				    "fiat": FIAT
+				},
 			… , 
 			
 				"safety_setting": {
-					"profit_target": {
-					"checked": bool,
-					"ratio": RATIO
-					},
-				"stop_loss":{
-					"checked": bool,
-					"ratio": RATIO
-					},
-				"stop_on_sell": bool,
-				"trailing_stop": {
-					"checked": bool,
-					"dec_ratio": RATIO,
-					"inc_ratio": RATIO
-					}
+				    "profit_target": {
+				    	"checked": bool,
+				    	"ratio": RATIO
+				    },
+				    "stop_loss":{
+				    "checked": bool,
+				    "ratio": RATIO
+				    },
+				    "stop_on_sell": bool,
+				    "trailing_stop": {
+				        "checked": bool,
+				        "dec_ratio": RATIO,
+				        "inc_ratio": RATIO
+				    }
 				}
-			}
+			    }
 
 ```
 
@@ -51,33 +52,34 @@ def initialize(self):
 
 ```python
 def initialize(self):
-self.context['trade_info'] = {"coinone": {
-					"currency": ["xrp"],
-					"interval": [1],
-					"fiat": "krw"
-					},
-			      "upbit": {
-					"currency": ["xrp"],
-					"interval": [1],
-					"fiat": "krw"
-					}, 
-			"safety_setting": {
-					"profit_target": {
-					"checked": True, 
-					"ratio": 0.10,
-						}, 
-			"stop_loss": {
-					"checked": False, 
-					"ratio": 0.10
-						}, 
-			"stop_on_sell": True, 
-			"trailing_stop": {
-					"checked": True, 
-					"dec_ratio": 0.05,
-					"inc_ratio": 0.07
-						}
-				}
-			}
+    self.context['trade_info'] = {
+        "coinone": {
+	    "currency": ["xrp"],
+	    "interval": [1],
+	    "fiat": "krw"
+	},
+	"upbit": {
+	    "currency": ["xrp"],
+	    "interval": [1],
+	    "fiat": "krw"
+	}, 
+	"safety_setting": {
+            "profit_target": {
+		"checked": True, 
+		"ratio": 0.10,
+	    }, 
+	    "stop_loss": {
+	        "checked": False, 
+		"ratio": 0.10
+	    }, 
+            "stop_on_sell": True, 
+	    "trailing_stop": {
+	        "checked": True, 
+	        "dec_ratio": 0.05,
+		"inc_ratio": 0.07
+	    }
+	}
+    }
 
 ```
 

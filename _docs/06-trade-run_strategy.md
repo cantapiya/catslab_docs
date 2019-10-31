@@ -71,9 +71,9 @@ def run_strategy(self, is_update, trade_info, update_len, data):
                     update_number = update_len[f'{currency}_{int(interval)}']
 
                     update_candle_20 = \
-                    candle_slicing(df=df, n=20, update_number=update_number)
+                    candle_slicing(df=data['{}_{}'.format(currency, interval)], n=20, update_number=update_number)
                     update_candle_60 = \
-                    candle_slicing(df=df, n=60, update_number=update_number)
+                    candle_slicing(df=data['{}_{}'.format(currency, interval)], n=60, update_number=update_number)
 
                     update_ema_20 = \
                     ema(update_candle_20['close'], 20).tail(update_number)
@@ -83,10 +83,15 @@ def run_strategy(self, is_update, trade_info, update_len, data):
                     if update_number >= 1:
                         start_index_20 = update_ema_20.index[0]
                         start_index_60 = update_ema_60.index[0]
-
-                        for index in range(update_number):
-                            data[f'{currency}_{int(interval)}'].set_value(start_index+timedelta(days=index), 'ema_20', update_ema_20.loc[start_index+timedelta(days=index)])
-                            data[f'{currency}_{int(interval)}'].set_value(start_index+timedelta(days=index), 'ema_60', update_ema_60.loc[start_index+timedelta(days=index)])
+                        
+                        update_index_list = list(update_ema_20.index)                        
+                        for _index in update_index_list:
+                            data['{}_{}'.format(currency, interval)].set_value(_index, 'ema_20', update_ema_20.loc[_index])
+                        
+                        update_index_list = list(update_ema_60.index)
+                        for _index in update_index_list:
+                            data['{}_{}'.format(currency, interval)].set_value(_index, 'ema_60', update_ema_60.loc[_index])
+                        
                         
                 else:
                     data[f'{currency}_{int(interval)}']['ema_20'] = \
